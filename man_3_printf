@@ -1,1 +1,54 @@
-.\" Manpage for _printf.
+.TH _PRINTF 2 "27 October 2020" "0.6" "Holberton Printf"
+.SH NAME
+B _printf
+- function to produce output according to a format.
+.SH SYNOPSIS
+.BR #include
+.BR <holberton.h>
+
+.BR int _printf(const char *format, ...);
+.SH DESCRIPTION
+Print the FORMAT in string, after interpreting the directives with '%'
+.IReturn:
+Print the numbers of characters excluding the Null-Byte
+        Print the ARGUMENT(s) according to FORMAT:
+.PP
+.B %c
+        Print the characters calling the function and returning in character ASCII
+.PP
+.B %s
+        Print an array of characters(string) excluding the null byte.
+.PP
+.B %d
+        TThe function will print an integer with sign in base 10.
+.PP
+.B %i
+        The function will print an integer with sign in base 10.
+.SH EXAMPLES OF USE
+.B Characters
+.PP
+_printf("Character with _print:[%c][%c][%c][%c]\n", 'M', 'U', 'S', 'A');
+.PP
+.I Output:
+MUSA
+.PP
+.B Strings
+.PP
+_printf("String:[%s]\n", "Hello, Holberton!");
+.PP
+.I Output:
+Hello, Holberton
+.PP
+.B Decimal and Integers
+.PP
+_printf("Actual: %i\n", INT_MIN);
+_printf("Actual: %i\n", INT_MAX);
+.I Output:
+-2147483648
++2147483648
+.SH SEE ALSO
+printf(3)
+.SH BUGS
+Not known bugs yet =)
+.SH AUTHOR
+Written by Baah Anthony, and Musa Kanneh.
