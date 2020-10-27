@@ -1,54 +1,73 @@
 #include "holberton.h"
 
 /**
- * _printf - produces output according to a format
- * @format: character string.
- *
- * Return: number of characters printed
- *(excluding the null byte used to end output to strings)
+ * _printf - custom function that format and print data
+ * @format:  list of types of arguments passed to the function
+ * Return: int
  */
 
 int _printf(const char *format, ...)
 {
-	int counter = -1;
+	va_list list;
+	int idx, j;
+	int len_buf = 0;
+	char *s;
+	char *create_buff;
 
-
-	if (format != NULL)
+	type_t ops[] = {
+		{"c", print_c},
+		{"s", print_s},
+		{"i", print_i},
+		{"d", print_i},
+		{"b", print_bin},
+		{NULL, NULL}
+	};
+	create_buff = malloc(1024 * sizeof(char));
+	if (create_buff == NULL)
 	{
-		int i;
-		va_list ar_list;
-		int (*o)(va_list);
-
-		va_start(ar_list, format);
-		if (format[0] == '%' && format[1] == '\0')
-		{
-			return (-1);
-		}
-		counter = 0;
-		for (i = 0; format[i] != '\0'; i++)
-		{
-			if (format[i] == '%')
-			{
-				if (format[i + 1] == '%')
-				{
-					counter += _putchar(format[i]);
-					i++;
-				}
-				else if (format[i + 1] != '\0')
-				{
-					o = get_func(format[i + 1]);
-					counter += (o ? o(ar_list) :
-						    _putchar(format[i]) +
-						    _putchar(format[i + 1]));
-					i++;
-				}
-			}
-			else
-			{
-				counter += _putchar(format[i]);
-			}
-		}
-		va_end(ar_list);
+		free(create_buff);
+		return (-1);
 	}
-	return (counter);
+	va_start(list, format);
+	if (format == NULL || list == NULL)
+		return (-1);
+	for (idx = 0; format[idx] != '\0'; idx++)
+	{
+		if (format[idx] == '%' && format[idx + 1] == '%')
+			continue;
+		else if (format[idx] == '%')
+		{
+			if (format[idx + 1] == ' ')
+				idx += _position(format, idx);
+			for (j = 0; ops[j].f != NULL; j++)
+			{
+				if (format[idx + 1] == *(ops[j].op))
+				{
+					s = ops[j].f(list);
+					if (s == NULL)
+						return (-1);
+					_strlen(s);
+					_strcat(create_buff, s, len_buf);
+					len_buf += _strlen(s);
+					idx++;
+					break;
+				}
+			}
+			if (ops[j].f == NULL)
+			{
+				create_buff[len_buf] = format[idx];
+				len_buf++;
+			}
+		}
+		else
+		{
+			create_buff[len_buf] = format[idx];
+			len_buf++;
+		}
+	}
+	create_buff[len_buf] = '\0';
+	write(1, create_buff, len_buf);
+	va_end(list);
+	free(create_buff);
+	return (len_buf);
 }

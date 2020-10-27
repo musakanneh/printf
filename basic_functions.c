@@ -1,4 +1,4 @@
-#include "Holberton"
+#include "holberton.h"
 
 /**
  * _str_positing - postrion of a string
@@ -6,13 +6,13 @@
  * Return: returns a basic position of a atring
  */
 
-int string_positing(const char *str, int n)
+int _position(const char *str, int n)
 {
-	int i, aux;
+	int i;
 
 	i = 0;
 
-	while (*s)
+	while (*str)
 	{
 		if (str[n + 1] != ' ')
 		{
@@ -21,7 +21,7 @@ int string_positing(const char *str, int n)
 		n++;
 		i++;
 	}
-	return (0)
+	return (0);
 }
 
 /**
@@ -33,12 +33,12 @@ int string_positing(const char *str, int n)
 int _strlen(char *str)
 {
 	register int i = 0;
-	
+
 	while (str[i] != '\0')
 	{
 		i++;
 	}
-	return (str);
+	return (i);
 }
 
 /**
@@ -68,9 +68,17 @@ int _numlen(int num)
  * Return: concatenated atring
  */
 
-int *_strcat(char *dest, char str, int n)
+char *_strcat(char *dest, char *src, int n)
 {
+	int i;
 
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[n + i] = src[i];
+		i++;
+	}
+	return (dest);
 }
 
 /**
@@ -94,40 +102,23 @@ int _abs(int n)
  * Return: returns a reversed string
  */
 
-void rev_string(char *str)
+void *rev_string(char *s)
 {
-	int i, left, temp;
+	int i = 0;
+	int aux = 0;
+	char ltemp;
 
-	while (str[i] != '\0')
+	while (*(s + i) != '\0')
+		i += 1;
+	i -= 1;
+
+	while (aux < i)
 	{
-		i++;
+		ltemp = s[i];
+		s[i] = s[aux];
+		s[aux] = ltemp;
+		aux++;
+		i--;
 	}
-	i--;
-	while (i > left)
-	{
-		temp = str[i];
-		str[i--] = str[left];
-		left[left++] = temp;
-	}
+	return (s);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
