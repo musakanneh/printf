@@ -10,27 +10,25 @@
 
 char *print_bin(va_list list)
 {
-	unsigned int n = va_arg(list, unsigned int);
-	char s[1024];
-	char *b;
+	unsigned int num = va_arg(list, unsigned int);
+	char str[1024];
+	char *binary;
 	int i;
 
-	b = s;
+	binary = str;
 	i = 0;
 
-	if (n == 0)
+	if (num == 0)
 	{
-		s[++i] = '0';
+		str[++i] = '0';
 	}
-
-	while (n != 0)
+	while (num != 0)
 	{
-		s[i] = (n % 2) + '0';
+		str[i] = (num % 2) + '0';
 		i++;
-		n /= 2;
+		num /= 2;
 	}
-	rev_string(s);
-	s[i] = '\0';
-
-	return (b);
+	rev_string(str);
+	str[i] = '\0';
+	return (binary);
 }

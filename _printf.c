@@ -22,6 +22,7 @@ int _printf(const char *format, ...)
 		{"b", print_bin},
 		{NULL, NULL}
 	};
+
 	create_buff = malloc(1024 * sizeof(char));
 	if (create_buff == NULL)
 	{

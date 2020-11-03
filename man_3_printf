@@ -20,7 +20,7 @@ Print the numbers of characters excluding the Null-Byte
         Print an array of characters(string) excluding the null byte.
 .PP
 .B %d
-        TThe function will print an integer with sign in base 10.
+        The function will print an integer with sign in base 10.
 .PP
 .B %i
         The function will print an integer with sign in base 10.
@@ -39,13 +39,6 @@ _printf("String:[%s]\n", "Hello, Holberton!");
 .I Output:
 Hello, Holberton
 .PP
-.B Decimal and Integers
-.PP
-_printf("Actual: %i\n", INT_MIN);
-_printf("Actual: %i\n", INT_MAX);
-.I Output:
--2147483648
-+2147483648
 .SH SEE ALSO
 printf(3)
 .SH BUGS
